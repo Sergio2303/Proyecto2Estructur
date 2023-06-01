@@ -14,8 +14,8 @@ root.withdraw()  # Ocultar la ventana principal
 def obtener_grafo_genero():
     with driver.session() as session:
         result = session.run(
-            "MATCH (g:Genero)<-[r]-(Canciones) "
-            "RETURN g, type(r), Canciones"
+            "MATCH (genero:Genero)<-[r]-(Canciones) "
+            "RETURN genero, type(r), Canciones"
         )
         
         #alert.setWindowTitle("Bienvenido")
@@ -23,7 +23,7 @@ def obtener_grafo_genero():
         #alert.exec_() 
 
         for record in result:
-            genero_node = record["g"]
+            genero_node = record["genero"]
             related_node = record["Canciones"]
 
             print(Fore.WHITE +Back.BLACK +f"Género: {genero_node['Genero']}")
