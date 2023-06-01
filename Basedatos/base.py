@@ -1,3 +1,4 @@
+from colorama import Fore, Back, Style
 import tkinter as tk
 from tkinter import messagebox
 from neo4j import GraphDatabase
@@ -20,13 +21,13 @@ def obtener_grafo_genero():
             genero_node = record["g"]
             related_node = record["Canciones"]
 
-            print(f"Género: {genero_node['Genero']}")
-            print(f"Nodo Relacionado: {related_node}\n")
-            #messagebox.showinfo(result)
-
+            print(Fore.WHITE +Back.BLACK +f"Género: {genero_node['Genero']}")
+            print(Fore.BLUE +Back.BLACK +f"Nodo Relacionado: {related_node}\n")
+           
+       
 
 #Ejemplo de uso
-messagebox.showinfo()
+obtener_grafo_genero()
 root.destroy()
 
 #Cerrar la conexión al finalizar
