@@ -3,6 +3,8 @@ import tkinter as tk
 from tkinter import messagebox
 from neo4j import GraphDatabase
 
+
+
 #Conexión a la base de datos Neo4j
 driver = GraphDatabase.driver("neo4j+s://2b702678.databases.neo4j.io", auth=("neo4j", "WR5R6xVto1O91dI_Y9prNnro8rvMR6swaeFmZHMaNVY"))
 # Crear una instancia de la ventana principal
@@ -16,8 +18,7 @@ def obtener_grafo_genero():
             "MATCH (genero:Genero)<-[r]-(Canciones) "
             "RETURN genero, type(r), Canciones"
         )
-        
-        #Guardar los datos con un ciclo
+        #Guardar los datos mediante un ciclo
         for record in result:
             genero_node = record["genero"]
             related_node = record["Canciones"]
