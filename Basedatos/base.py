@@ -21,8 +21,8 @@ def obtener_grafo_genero():
             genero_node = record["genero"]
             related_node = record["Canciones"]
 
-            print(Fore.RED +Back.BLACK +f"Género: {genero_node['Genero']}")
-            print(Fore.BLUE +Back.WHITE +f"Nodo Relacionado: {related_node}\n")
+            print(Fore.WHITE +Back.BLACK +f"Género: {genero_node['Genero']}")
+            print(Fore.BLUE +Back.BLACK +f"Nodo Relacionado: {related_node}\n")
            
        
 
