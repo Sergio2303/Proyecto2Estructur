@@ -9,6 +9,7 @@ driver = GraphDatabase.driver("neo4j+s://2b702678.databases.neo4j.io", auth=("ne
 root = tk.Tk()
 root.withdraw()  # Ocultar la ventana principal
 
+#Obtencion de los grafos
 def obtener_grafo_genero():
     with driver.session() as session:
         result = session.run(
@@ -16,11 +17,11 @@ def obtener_grafo_genero():
             "RETURN genero, type(r), Canciones"
         )
         
-        
+        #Guardar los datos con un ciclo
         for record in result:
             genero_node = record["genero"]
             related_node = record["Canciones"]
-
+            #Muestra de resultados
             print(Fore.WHITE +Back.BLACK +f"Género: {genero_node['Genero']}")
             print(Fore.BLUE +Back.BLACK +f"Nodo Relacionado: {related_node}\n")
            
