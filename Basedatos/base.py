@@ -46,6 +46,25 @@ class Programa(Tk):
         self.user = "neo4j"
         self.password = "" 
         self.driver = GraphDatabase.driver(self.uri, auth=(self.user, self.password))
+           # En esta parte se verifica la sesion, tambien que la base de datos este activa y que esta tenga los datos correctos
+        with self.driver.session() as session:
+            resultado = session.run("MATCH (u:User {name: $name, password: $password}) RETURN u", name=self.usuario, password=self.contrasena)
+            registro = resultado.single()
+            if registro:
+                # se revisa que los usuarios y contraseñas sean correctas
+                messagebox.showinfo("Iniciar sesión", "Inicio de sesión exitoso, bienvenido "+ self.usuario + "!")
+            
+                self.destroy()
+                #se pasa a la nueva ventana
+                ventana2= Menu(self.usuario, self.driver) 
+                #acá se mandan como parametros el usuario y el driver de la conexion de la base de datos
+
+            else:
+                # aca se verifica si el usuario o contraseña son incorrectos
+                messagebox.showerror("Iniciar sesión", "Usuario o contraseña incorrectos")
+
+v= Programa() 
+#regresa al inicio de sesion
         
         
 
