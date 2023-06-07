@@ -36,3 +36,17 @@ class Programa(Tk):
         btn1.config(bg="#a2d2ff") 
         #termina la ventana
         self.mainloop()
+    
+    def iniciarSesion(self):
+        #obtener el usuario y contraseña 
+        self.usuario= (self.e1.get())
+        self.contrasena= (self.e2.get())
+        #conexion a la base de datos y tambien verificar usuarios
+        self.uri = "" 
+        self.user = "neo4j"
+        self.password = "" 
+        self.driver = GraphDatabase.driver(self.uri, auth=(self.user, self.password))
+        
+        
+
+    
