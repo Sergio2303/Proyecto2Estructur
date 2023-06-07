@@ -63,6 +63,50 @@ class Programa(Tk):
                 # aca se verifica si el usuario o contraseña son incorrectos
                 messagebox.showerror("Iniciar sesión", "Usuario o contraseña incorrectos")
 
+                
+class Menu(Tk):
+    #Se utilizan los dos parametros para mantener la sesion iniciada
+    def _init_(self, usuario, driver):
+        Tk._init_(self)
+        #configuracion
+        self.geometry("750x400")
+        self.config(bg="#bde0fe")
+        self.resizable(width=0, height=0)
+        self.title("Menu Principal")
+        #objetos de la ventana
+        Label(text="Menu Principal", fg="#457b9d", bg="#bde0fe", font=("Times New Roman",28)).place(x=270,y=40)
+        btn2= Button(self, text="Ver recomendaciones",width=20, command=self.recomendar)
+        btn2.place(x=310,y=120)
+        btn2.config(bg="#a2d2ff") 
+        #instanciar el usuario como parametro
+        self.usuario= usuario 
+        #instanciar el driver como parametro 
+        self.driver= driver 
+        #fin 
+        self.mainloop()
+
+    def recomendar(self):
+        #Consulta en base de datos y confirmar que siga abierta la sesion
+        with self.driver.session() as session:
+            #resultado de la consulta
+           
+            resultado = session.run('MATCH (u:User {name: "'+self.usuario+'"})-[:ESCUCHA]->(g:Genero)<-[:ESCUCHA]-(ou:User)-[:ESCUCHA]->(rg:Genero)<-[:TIENE_GENERO]-(c:Cancion) WHERE NOT (u)-[:ESCUCHA]->(rg) WITH DISTINCT c.nombreCancion AS cancion, COLLECT(DISTINCT rg.nombre) AS generos RETURN cancion, generos')
+            #lista= [cancion, genero]
+            resultado=list(resultado)
+            print(resultado)
+            
+            #crear un listbox (objeto para mostrar la lista resultado)solo se instancia
+            listbox= Listbox(self)
+            listbox.place(x=220,y=160)
+            listbox.config(width=60, background="#caf0f8")
+            
+            #recorrer con el for 
+            for registro in resultado:
+                cancion = registro["cancion"] 
+                generos = ", ".join(registro["generos"]) #porque es una lista
+                #enseña los resultados 
+                listbox.insert(END, f" cancion: {cancion} - generos: - {generos}")
+
 v= Programa() 
 #regresa al inicio de sesion
         
