@@ -1,5 +1,5 @@
 #22808, Sergio Palacios
-#
+#22742, Cristian Guevara
 #librerias
 #libreria para conectarse con la base de datos
 from neo4j import GraphDatabase 
