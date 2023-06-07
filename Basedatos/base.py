@@ -42,9 +42,9 @@ class Programa(Tk):
         self.usuario= (self.e1.get())
         self.contrasena= (self.e2.get())
         #conexion a la base de datos y tambien verificar usuarios
-        self.uri = "" 
+        self.uri = "bolt://localhost:7687" 
         self.user = "neo4j"
-        self.password = "" 
+        self.password = "12345678" 
         self.driver = GraphDatabase.driver(self.uri, auth=(self.user, self.password))
            # En esta parte se verifica la sesion, tambien que la base de datos este activa y que esta tenga los datos correctos
         with self.driver.session() as session:
